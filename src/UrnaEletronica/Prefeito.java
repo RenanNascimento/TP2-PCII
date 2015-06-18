@@ -2,6 +2,7 @@ package UrnaEletronica;
 
 public class Prefeito extends Candidato
 {
+	
 	protected VicePrefeito vicePrefeito;
 	
     public Prefeito(String nome, String email, String dataNascimento, int codigo, VicePrefeito vicePrefeito) {
@@ -19,7 +20,7 @@ public class Prefeito extends Candidato
             return true;
     }
     
-    public static void listarPrefeito (Prefeito p){
+    public static void listarPrefeito (Prefeito p){	
     	
     	System.out.println("");
 		System.out.println("Dados do Prefeito");
@@ -27,12 +28,11 @@ public class Prefeito extends Candidato
 		System.out.println("Nome: "+p.getNome()); 
 		System.out.println("Email: "+p.getEmail()); 
 		System.out.println("Data de nascimento: "+p.getDataNascimento());
-		System.out.println("");
 		System.out.println("Dados do Vice-Prefeito");
 		System.out.println("Codigo Vice-Prefeito: "+p.vicePrefeito.getCodigo()); 
 		System.out.println("Nome Vice-Prefeito: "+p.vicePrefeito.getNome()); 
 		System.out.println("Email Vice-Prefeito:"+p.vicePrefeito.getEmail()); 
 		System.out.println("Data de nascimento Vice-Prefeito: "+p.vicePrefeito.getDataNascimento()); 
-    	
+		System.out.println("------------------------------------");
     }
 }
