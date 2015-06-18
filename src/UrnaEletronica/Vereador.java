@@ -16,4 +16,15 @@ public class Vereador extends Candidato{
             return true;
     }
     
+    public static void listarVereador (Vereador v){	
+    	
+    	System.out.println("");
+		System.out.println("Dados do Vereador");
+		System.out.println("Codigo: "+v.getCodigo());
+		System.out.println("Nome: "+v.getNome()); 
+		System.out.println("Email: "+v.getEmail()); 
+		System.out.println("Data de nascimento: "+v.getDataNascimento());
+		System.out.println("------------------------------------");
+    }
+    
 }
