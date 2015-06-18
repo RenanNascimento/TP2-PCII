@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static UrnaEletronica.Eleitor.verificaTituloEleitor;
+import static UrnaEletronica.Eleitor.pesquisaEleitor;
+import static UrnaEletronica.Eleitor.imprimeEleitor;
 
 public class MenuEleitor 
 {
-	public static void EleitorMenu ()
+	public static void main (String [] args)
 	{
 		Scanner in = new Scanner (System.in);
 		
@@ -31,21 +33,36 @@ public class MenuEleitor
 		
 		switch (opcao)
 		{
-			case 1: System.out.println("Digite o nome do eleitor: ");
-					nome = in.next();
-					System.out.println("Digite a data de nascimento do eleitor: ");
-					dataDeNascimento = in.next();
-					System.out.println("Digite o titulo do eleitor: ");
-					titulo = in.next();
-					
-					System.out.println("Digite a zona do eleitor: ");
-					zona = in.next();
-					System.out.println("Digite a secao do eleitor: ");
-					secao = in.next();
-					eleitor = new Eleitor (nome, dataDeNascimento, titulo, zona, secao);
+			case 1: 
+					try
+					{
+						System.out.println("Digite o nome do eleitor: ");
+						nome = in.next();
+						System.out.println("Digite a data de nascimento do eleitor: ");
+						dataDeNascimento = in.next();
+						System.out.println("Digite o titulo do eleitor: ");
+						titulo = in.next();
+						verificaTituloEleitor (titulo, eleitores);
+						System.out.println("Digite a zona do eleitor: ");
+						zona = in.next();
+						System.out.println("Digite a secao do eleitor: ");
+						secao = in.next();
+						eleitor = new Eleitor (nome, dataDeNascimento, titulo, zona, secao);
+						eleitores.add(eleitor);
+					}
+					catch (TituloInvalidoException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
 					break;
 			
-			case 2:
+			case 2: try
+					{
+						System.out.println("Digite o titulo do eleitor ser excluido: ");
+						titulo = in.nextLine();
+						eleitor = pesquisaEleitor (titulo, eleitores);
+						
+					}
 		}
 	}
 }
