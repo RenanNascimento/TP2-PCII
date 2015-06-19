@@ -28,12 +28,15 @@ public class MenuEleitor
 		
 		Iterator i;
 		
+		do
+		{
 		System.out.println("Digite uma das opcoes abaixo: ");
 		System.out.println("1 - Cadastrar eleitor");
 		System.out.println("2 - Excluir eleitor");
 		System.out.println("3 - Listar eleitores");
 		System.out.println("4 - Pesquisar eleitores");
 		System.out.println("5 - Alterar eleitor");
+		System.out.println("0 - Voltar");
 		opcao = in.nextInt();
 		
 		switch (opcao)
@@ -74,10 +77,14 @@ public class MenuEleitor
 							System.out.println("Digite o titulo do eleitor a ser excluido: ");
 							titulo = in.next();
 							eleitor = pesquisaEleitor (titulo, eleitores);
-							imprimeEleitorParcial (eleitor);
+							imprimeEleitorCompleta (eleitor);
 							System.out.println("Voce realmente deseja excluir esse ? 1-Sim/0-Nao"); confirma = in.nextInt();
 							if (confirma==1)
+							{
 								eleitores.remove(eleitor);
+								System.out.println("Eleitor excluido com sucesso!!!");
+							}
+								
 							else
 								System.out.println("Voce optou por nao excluir o eleitor!!!");
 						}
@@ -105,7 +112,7 @@ public class MenuEleitor
 						else
 						{
 							for (int index=0; index<eleitores.size(); index++)
-								imprimeEleitorCompleta (eleitores.get(index));
+								imprimeEleitorParcial (eleitores.get(index));
 						}
 					}
 					catch (InexistenteException e)
@@ -126,6 +133,7 @@ public class MenuEleitor
 							System.out.println("Digite o nome do eleitor a ser pesquisado: ");
 							nome = in.next();
 							eleitor = pesquisaEleitorNome (nome, eleitores);
+							imprimeEleitorCompleta (eleitor);
 						}
 					}
 					catch (InexistenteException e)
@@ -148,17 +156,26 @@ public class MenuEleitor
 						}
 						else
 						{
+							confirma = 0;
 							System.out.println("Digite o titulo do eleitor a ser alterado: ");
 							titulo = in.next();
 							eleitor = pesquisaEleitor (titulo, eleitores);
-							System.out.println("Digite o novo nome do eleitor: ");
-							eleitor.setNome(in.next());
-							System.out.println("Digite a nova data de nascimento do eleitor: ");
-							eleitor.setDataDeNascimento(in.next());
-							System.out.println("Digite a nova zona do eleitor: ");
-							eleitor.setZona(in.next());
-							System.out.println("Digite a nova secao do eleitor: ");
-							eleitor.setSecao(in.next());
+							imprimeEleitorCompleta (eleitor);
+							System.out.println("Voce realmente deseja alterar o eleitor acima? (1-Sim/0-Não");
+							confirma = in.nextInt();
+							if (confirma==1)
+							{
+								System.out.println("Digite o novo nome do eleitor: ");
+								eleitor.setNome(in.next());
+								System.out.println("Digite a nova data de nascimento do eleitor: ");
+								eleitor.setDataDeNascimento(in.next());
+								System.out.println("Digite a nova zona do eleitor: ");
+								eleitor.setZona(in.next());
+								System.out.println("Digite a nova secao do eleitor: ");
+								eleitor.setSecao(in.next());
+							}
+							else
+								System.out.println("Voce optou por nao alterar o eleitor!!!");
 						}
 					}
 					catch (InexistenteException e)
@@ -170,7 +187,10 @@ public class MenuEleitor
 						System.out.println("Erro: "+e.toString());
 					}
 					break;
-			default: System.out.println("Opcao invalida!!!");
+			default: if (opcao!=0)
+					 	System.out.println("Opcao invalida!!!");
 		}
+		}
+	while (opcao!=0);
 	}
 }
