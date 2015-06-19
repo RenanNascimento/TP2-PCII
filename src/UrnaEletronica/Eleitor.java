@@ -89,8 +89,8 @@ public class Eleitor
 		for (i=0; i<eleitores.size(); i++)
 			if (titulo==eleitores.get(i).getTitulo())
 				{
-				eleitor = eleitores.get(i);
-				return (eleitor);
+					eleitor = eleitores.get(i);
+					return (eleitor);
 				}
 		
 		if (i==eleitores.size())
@@ -98,13 +98,38 @@ public class Eleitor
 		return null; 
 	}
 	
-	public static void imprimeEleitor (Eleitor eleitor)
+	public static Eleitor pesquisaEleitorNome (String nome, ArrayList <Eleitor> eleitores) throws EleitorNaoExistenteException
+	{
+		int i;
+		Eleitor eleitor;
+		
+		for (i=0; i<eleitores.size(); i++)
+			if (nome==eleitores.get(i).getNome())
+			{
+				eleitor = eleitores.get(i);
+				return (eleitor);
+			}
+		if (i==eleitores.size())
+			throw new EleitorNaoExistenteException ("Nao existe nenhum eleitor com o titulo pesquisado!!!");
+		return null;
+	}
+	
+	public static void imprimeEleitorCompleta (Eleitor eleitor)
 	{
 		System.out.println("Nome do eleitor: "+eleitor.getNome());
 		System.out.println("Data de nascimento: "+eleitor.getDataDeNascimento());
 		System.out.println("Titulo do eleitor: "+eleitor.getTitulo());
 		System.out.println("Zona do eleitor: "+eleitor.getZona());
 		System.out.println("Secao: "+eleitor.getSecao());
+		System.out.println("--------------------------------------------------");
+		System.out.println("");
+	}
+	
+	public static void imprimeEleitorParcial (Eleitor eleitor)
+	{
+		System.out.println("Nome do eleitor: "+eleitor.getNome());
+		System.out.println("Titulo do eleitor: "+eleitor.getTitulo());
+		System.out.println("--------------------------------------------------");
 		System.out.println("");
 	}
 }

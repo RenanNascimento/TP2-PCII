@@ -6,11 +6,13 @@ import java.util.Iterator;
 
 import static UrnaEletronica.Eleitor.verificaTituloEleitor;
 import static UrnaEletronica.Eleitor.pesquisaEleitor;
-import static UrnaEletronica.Eleitor.imprimeEleitor;
+import static UrnaEletronica.Eleitor.imprimeEleitorCompleta;
+import static UrnaEletronica.Eleitor.imprimeEleitorParcial;
+import static UrnaEletronica.Eleitor.pesquisaEleitorNome;
 
 public class MenuEleitor 
 {
-	public static void main (String [] args)
+	public static void EleitorMenu ()
 	{
 		Scanner in = new Scanner (System.in);
 		
@@ -22,6 +24,9 @@ public class MenuEleitor
 		Eleitor eleitor;
 		ArrayList<Eleitor> eleitores = new ArrayList<Eleitor>();
 		int opcao;
+		int confirma;
+		
+		Iterator i;
 		
 		System.out.println("Digite uma das opcoes abaixo: ");
 		System.out.println("1 - Cadastrar eleitor");
@@ -58,11 +63,114 @@ public class MenuEleitor
 			
 			case 2: try
 					{
-						System.out.println("Digite o titulo do eleitor ser excluido: ");
-						titulo = in.nextLine();
-						eleitor = pesquisaEleitor (titulo, eleitores);
+						i = eleitores.iterator();
+						if (i.hasNext()==false)
+						{
+							throw new InexistenteException ("Nao existe nenhum eleitor");
+						}
+						else
+						{
+							confirma = 0;
+							System.out.println("Digite o titulo do eleitor a ser excluido: ");
+							titulo = in.next();
+							eleitor = pesquisaEleitor (titulo, eleitores);
+							imprimeEleitorParcial (eleitor);
+							System.out.println("Voce realmente deseja excluir esse ? 1-Sim/0-Nao"); confirma = in.nextInt();
+							if (confirma==1)
+								eleitores.remove(eleitor);
+							else
+								System.out.println("Voce optou por nao excluir o eleitor!!!");
+						}
 						
 					}
+			
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+			
+					catch (EleitorNaoExistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					break;
+					
+			case 3: try
+					{
+						i = eleitores.iterator();
+						if (i.hasNext()==false)
+						{
+							throw new InexistenteException ("Nao existe nenhum eleitor");
+						}
+						else
+						{
+							for (int index=0; index<eleitores.size(); index++)
+								imprimeEleitorCompleta (eleitores.get(index));
+						}
+					}
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					break;
+					
+			case 4: try
+					{
+						i = eleitores.iterator();
+						if (i.hasNext()==false)
+						{
+							throw new InexistenteException ("Nao existe nenhum eleitor");
+						}
+						else
+						{
+							System.out.println("Digite o nome do eleitor a ser pesquisado: ");
+							nome = in.next();
+							eleitor = pesquisaEleitorNome (nome, eleitores);
+						}
+					}
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					catch (EleitorNaoExistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					break;
+					
+			case 5:
+					try
+					{
+						i = eleitores.iterator();
+						if (i.hasNext()==false)
+						{
+							throw new InexistenteException ("Nao existe nenhum eleitor");
+						}
+						else
+						{
+							System.out.println("Digite o titulo do eleitor a ser alterado: ");
+							titulo = in.next();
+							eleitor = pesquisaEleitor (titulo, eleitores);
+							System.out.println("Digite o novo nome do eleitor: ");
+							eleitor.setNome(in.next());
+							System.out.println("Digite a nova data de nascimento do eleitor: ");
+							eleitor.setDataDeNascimento(in.next());
+							System.out.println("Digite a nova zona do eleitor: ");
+							eleitor.setZona(in.next());
+							System.out.println("Digite a nova secao do eleitor: ");
+							eleitor.setSecao(in.next());
+						}
+					}
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					catch (EleitorNaoExistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					break;
+			default: System.out.println("Opcao invalida!!!");
 		}
 	}
 }
