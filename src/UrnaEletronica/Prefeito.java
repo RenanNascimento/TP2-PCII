@@ -20,7 +20,7 @@ public class Prefeito extends Candidato
             return true;
     }
     
-    public static void listarPrefeito (Prefeito p){	
+    public static void listarPrefeitoCompleto (Prefeito p){	
     	
     	System.out.println("");
 		System.out.println("Dados do Prefeito");
@@ -34,5 +34,19 @@ public class Prefeito extends Candidato
 		System.out.println("Email Vice-Prefeito:"+p.vicePrefeito.getEmail()); 
 		System.out.println("Data de nascimento Vice-Prefeito: "+p.vicePrefeito.getDataNascimento()); 
 		System.out.println("------------------------------------");
+
+    }
+    
+    public static void listarPrefeitoParcial (Prefeito p){
+    	    	
+    	System.out.println("");
+		System.out.println("Dados do Prefeito");
+		System.out.println("Codigo: "+p.getCodigo());
+		System.out.println("Nome: "+p.getNome()); 
+		System.out.println("Dados do Vice-Prefeito");
+		System.out.println("Codigo Vice-Prefeito: "+p.vicePrefeito.getCodigo()); 
+		System.out.println("Nome Vice-Prefeito: "+p.vicePrefeito.getNome()); 
+		System.out.println("------------------------------------");
+	
     }
 }

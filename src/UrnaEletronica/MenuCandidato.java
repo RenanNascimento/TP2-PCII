@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static UrnaEletronica.Prefeito.verificaCodigoPrefeito;
-import static UrnaEletronica.Prefeito.listarPrefeito;
+import static UrnaEletronica.Prefeito.listarPrefeitoCompleto;
+import static UrnaEletronica.Prefeito.listarPrefeitoParcial;
 import static UrnaEletronica.Vereador.verificaCodigoVereador;
 import static UrnaEletronica.Vereador.listarVereador;
 
@@ -28,7 +29,7 @@ public class MenuCandidato
 		boolean menu = true, submenuPrefeito, submenuVereador;
 		
 	    String nome, nomeVicePrefeito,email, emailVicePrefeito, dataNascimento, dataNascimentoVicePrefeito;
-	    int codigo, codigoVicePrefeito, opcao, opcaoPrefeito, opcaoVereador, index, confirma;
+	    int codigo, opcao, opcaoPrefeito, opcaoVereador, index, confirma;
 	    
 	    
 	    do{
@@ -74,7 +75,6 @@ public class MenuCandidato
 		    						System.out.println("Data de nascimento: "); dataNascimento = in.next();
 		    						System.out.println("");
 		    						System.out.println("Digite os dados do Vice-Prefeito");
-		    						System.out.println("Codigo Vice-Prefeito: "); codigoVicePrefeito = in.nextInt();
 		    						System.out.println("Nome Vice-Prefeito: "); nomeVicePrefeito = in.next();
 		    						System.out.println("Email Vice-Prefeito:"); emailVicePrefeito = in.next();
 		    						System.out.println("Data de nascimento Vice-Prefeito: "); dataNascimentoVicePrefeito = in.next();
@@ -91,7 +91,7 @@ public class MenuCandidato
 		    						}
 		    						
 		    						if(verificaCodigoPrefeito(codigo) && confirma == 0){
-		    							vP = new VicePrefeito(nomeVicePrefeito, emailVicePrefeito, dataNascimentoVicePrefeito, codigoVicePrefeito);
+		    							vP = new VicePrefeito(nomeVicePrefeito, emailVicePrefeito, dataNascimentoVicePrefeito, codigo);
 		    							p = new Prefeito(nome, email, dataNascimento, codigo, vP);
 		    							prefeitos.add(p);
 		    						}
@@ -118,7 +118,7 @@ public class MenuCandidato
 			    							p = (Prefeito) i.next();
 			    							if(codigo == p.getCodigo()){
 			    								System.out.println("Dados do Prefeito que se deseja excluir: ");
-			    								listarPrefeito(p);
+			    								listarPrefeitoCompleto(p);
 			    								break;
 			    							}
 			    						}
@@ -149,7 +149,7 @@ public class MenuCandidato
 			    						i = prefeitos.iterator();
 			    						while(i.hasNext()){
 			    							p = (Prefeito) i.next();
-			    							listarPrefeito(p);
+			    							listarPrefeitoParcial(p);
 			    						}
 	    							}
 	    						}
@@ -165,12 +165,12 @@ public class MenuCandidato
 	    								throw new InexistenteException ("Não existe nenhum Prefeito");
 	    							}
 	    							else{
-		    							System.out.println("Digite o codigo do Prefeito a ser pesquisado: ");
-			    						codigo = in.nextInt();
+		    							System.out.println("Digite o nome do Prefeito a ser pesquisado: ");
+			    						nome = in.next();
 			    						for(index=0; i.hasNext(); index++){
 			    							p = (Prefeito) i.next();
-			    							if(codigo == p.getCodigo()){
-			    								listarPrefeito(p);
+			    							if(nome.equals(p.getNome())){
+			    								listarPrefeitoParcial(p);
 			    								break;
 			    							}
 			    						}
@@ -196,18 +196,16 @@ public class MenuCandidato
 			    							p = (Prefeito) i.next();
 			    							if(codigo == p.getCodigo()){
 			    								System.out.println("Dados do Prefeito que serao alterados: ");
-			    								listarPrefeito(p);
+			    								listarPrefeitoCompleto(p);
 			    								System.out.println("");
 				    							System.out.println("Voce realmente deseja alterar os dados desse Prefeito? 1-Sim/0-Nao"); confirma = in.nextInt();
 				    							if(confirma == 1){
 						    						System.out.println("Digite os dados do Prefeito");
-						    						System.out.println("Codigo: "); codigo = in.nextInt(); p.setCodigo(codigo);
 						    						System.out.println("Nome: "); nome = in.next(); p.setNome(nome);
 						    						System.out.println("Email: "); email = in.next(); p.setEmail(email);
 						    						System.out.println("Data de nascimento: "); dataNascimento = in.next(); p.setDataNascimento(dataNascimento);
 						    						System.out.println("");
 						    						System.out.println("Digite os dados do Vice-Prefeito");
-						    						System.out.println("Codigo Vice-Prefeito: "); codigoVicePrefeito = in.nextInt(); p.vicePrefeito.setCodigo(codigoVicePrefeito);
 						    						System.out.println("Nome Vice-Prefeito: "); nomeVicePrefeito = in.next(); p.vicePrefeito.setNome(nomeVicePrefeito);
 						    						System.out.println("Email Vice-Prefeito:"); emailVicePrefeito = in.next();p.vicePrefeito.setEmail(emailVicePrefeito);
 						    						System.out.println("Data de nascimento Vice-Prefeito: "); dataNascimentoVicePrefeito = in.next(); p.vicePrefeito.setDataNascimento(dataNascimentoVicePrefeito);
