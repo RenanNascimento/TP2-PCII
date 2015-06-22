@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 import static UrnaEletronica.MenuCandidato.CandidatoMenu;
 import static UrnaEletronica.MenuEleitor.EleitorMenu;
+import static UrnaEletronica.IniciarEleicoes.Iniciar;
 
 public class UrnaEletronica {
 
 	public static void main(String[] args) {		
 		int opcao;
 		Scanner in = new Scanner (System.in);
+		MinhasListas listas = new MinhasListas ();
 		CandidatoMenu();
 		
 		System.out.println("Escolha uma das opcoes abaixo: ");
@@ -24,9 +26,9 @@ public class UrnaEletronica {
 		{
 			case 1: CandidatoMenu();
 					break;
-			case 2: EleitorMenu();
+			case 2: EleitorMenu(listas);
 					break;
-			case 3: 
+			case 3: Iniciar(listas);
 					break;
 			case 4: // Produz os relatorios
 				 	break;

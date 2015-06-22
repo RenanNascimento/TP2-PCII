@@ -8,7 +8,7 @@ import static UrnaEletronica.Eleitor.verificaTituloEleitor;
 
 public class IniciarEleicoes 
 {
-	public static void Iniciar ()
+	public static void Iniciar (MinhasListas listas)
 	{
 		Scanner in = new Scanner (System.in);
 		String nome;
@@ -16,36 +16,34 @@ public class IniciarEleicoes
 		String zona;
 		String secao;
 		String horaAbertura;
-		String numEleitoresSecao;
-		Eleitor presitente;
-		int opcao=0;
+		int numEleitoresSecao;
+		Eleitor presidentes [] = new Eleitor [3];
+		int i;
 		
-		ArrayList <Eleitor> presidentes = new ArrayList <Eleitor>();
-		do
+		try
 		{
-			System.out.println("Digite uma das opcoes abaixo: ");
-			System.out.println("1 - Cadastrar um presistente");
-			System.out.println("0 - Voltar");
-			opcao = in.nextInt();
-			
-			switch (opcao)
+			for (i=0; i<3; i++)
 			{
-				case 1:
-//					try
-//					{
-//						System.out.println("Digite o nome do presidente: ");
-//						nome = in.next();
-//						System.out.println("Digite o titulo do presidente: ");
-//						titulo = in.next();
-//						verificaTituloEleitor (titulo, eleitores);
-//					}
-//					catch (TituloInvalidoException e)
-//					{
-//						System.out.println("Erro: "+e.toString());
-//					}
-					break;
+				System.out.println("Digite o nome do presidente: ");
+				nome = in.next();
+				System.out.println("Digite o titulo do presidente: ");
+				titulo = in.next();
+				verificaTituloEleitor (titulo, listas.eleitores);
+				System.out.println("Digite a zona no presidente: ");
+				zona = in.next();
+				System.out.println("Digite a secao do presidente: ");
+				secao = in.next();
+				System.out.println("Digite a hora de abertura da secao: ");
+				horaAbertura = in.next();
+				System.out.println("Digite o numero de eleitores da secao: ");
+				numEleitoresSecao = in.nextInt();
+				presidentes [i] = new Eleitor (nome, titulo, zona, secao, horaAbertura, numEleitoresSecao);
+				listas.eleitores.add(presidentes [i]);
 			}
 		}
-		while (opcao!=0);
-	}
+		catch (TituloInvalidoException e)
+		{
+			System.out.println("Erro: "+e.toString());
+		}
+	}	
 }

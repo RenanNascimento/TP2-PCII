@@ -10,9 +10,10 @@ import static UrnaEletronica.Eleitor.imprimeEleitorCompleta;
 import static UrnaEletronica.Eleitor.imprimeEleitorParcial;
 import static UrnaEletronica.Eleitor.pesquisaEleitorNome;
 
+
 public class MenuEleitor 
-{
-	public static void EleitorMenu ()
+{	
+	public static void EleitorMenu (MinhasListas listas)
 	{
 		Scanner in = new Scanner (System.in);
 		
@@ -22,10 +23,8 @@ public class MenuEleitor
 		String zona;
 		String secao;
 		Eleitor eleitor;
-		ArrayList<Eleitor> eleitores = new ArrayList<Eleitor>();
 		int opcao;
 		int confirma;
-		
 		Iterator i;
 		
 		do
@@ -50,13 +49,13 @@ public class MenuEleitor
 						dataDeNascimento = in.next();
 						System.out.println("Digite o titulo do eleitor: ");
 						titulo = in.next();
-						verificaTituloEleitor (titulo, eleitores);
+						verificaTituloEleitor (titulo, listas.eleitores);
 						System.out.println("Digite a zona do eleitor: ");
 						zona = in.next();
 						System.out.println("Digite a secao do eleitor: ");
 						secao = in.next();
 						eleitor = new Eleitor (nome, dataDeNascimento, titulo, zona, secao);
-						eleitores.add(eleitor);
+						listas.eleitores.add(eleitor);
 					}
 					catch (TituloInvalidoException e)
 					{
@@ -66,7 +65,7 @@ public class MenuEleitor
 			
 			case 2: try
 					{
-						i = eleitores.iterator();
+						i = listas.eleitores.iterator();
 						if (i.hasNext()==false)
 						{
 							throw new InexistenteException ("Nao existe nenhum eleitor");
@@ -76,12 +75,12 @@ public class MenuEleitor
 							confirma = 0;
 							System.out.println("Digite o titulo do eleitor a ser excluido: ");
 							titulo = in.next();
-							eleitor = pesquisaEleitor (titulo, eleitores);
+							eleitor = pesquisaEleitor (titulo, listas.eleitores);
 							imprimeEleitorCompleta (eleitor);
 							System.out.println("Voce realmente deseja excluir esse ? 1-Sim/0-Nao"); confirma = in.nextInt();
 							if (confirma==1)
 							{
-								eleitores.remove(eleitor);
+								listas.eleitores.remove(eleitor);
 								System.out.println("Eleitor excluido com sucesso!!!");
 							}
 								
@@ -104,15 +103,15 @@ public class MenuEleitor
 					
 			case 3: try
 					{
-						i = eleitores.iterator();
+						i = listas.eleitores.iterator();
 						if (i.hasNext()==false)
 						{
 							throw new InexistenteException ("Nao existe nenhum eleitor");
 						}
 						else
 						{
-							for (int index=0; index<eleitores.size(); index++)
-								imprimeEleitorParcial (eleitores.get(index));
+							for (int index=0; index<listas.eleitores.size(); index++)
+								imprimeEleitorParcial (listas.eleitores.get(index));
 						}
 					}
 					catch (InexistenteException e)
@@ -123,7 +122,7 @@ public class MenuEleitor
 					
 			case 4: try
 					{
-						i = eleitores.iterator();
+						i = listas.eleitores.iterator();
 						if (i.hasNext()==false)
 						{
 							throw new InexistenteException ("Nao existe nenhum eleitor");
@@ -132,7 +131,7 @@ public class MenuEleitor
 						{
 							System.out.println("Digite o nome do eleitor a ser pesquisado: ");
 							nome = in.next();
-							eleitor = pesquisaEleitorNome (nome, eleitores);
+							eleitor = pesquisaEleitorNome (nome, listas.eleitores);
 							imprimeEleitorCompleta (eleitor);
 						}
 					}
@@ -149,7 +148,7 @@ public class MenuEleitor
 			case 5:
 					try
 					{
-						i = eleitores.iterator();
+						i = listas.eleitores.iterator();
 						if (i.hasNext()==false)
 						{
 							throw new InexistenteException ("Nao existe nenhum eleitor");
@@ -159,7 +158,7 @@ public class MenuEleitor
 							confirma = 0;
 							System.out.println("Digite o titulo do eleitor a ser alterado: ");
 							titulo = in.next();
-							eleitor = pesquisaEleitor (titulo, eleitores);
+							eleitor = pesquisaEleitor (titulo, listas.eleitores);
 							imprimeEleitorCompleta (eleitor);
 							System.out.println("Voce realmente deseja alterar o eleitor acima? (1-Sim/0-Não");
 							confirma = in.nextInt();
