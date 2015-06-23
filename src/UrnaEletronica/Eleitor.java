@@ -11,6 +11,7 @@ public class Eleitor
 	protected String secao;
 	protected String horaAbertura;
 	protected int numEleitoresSecao;
+	protected boolean secaoEncerrada;
 	
 	public Eleitor (String nome, String dataDeNascimento, String titulo, String zona, String secao) 
 	{
@@ -29,6 +30,7 @@ public class Eleitor
 		this.secao = secao;
 		this.horaAbertura = horaAbertura;
 		this.numEleitoresSecao = numEleitoresSecao;
+		this.secaoEncerrada = false;
 	}
 
 	public String getNome() {
@@ -69,6 +71,11 @@ public class Eleitor
 
 	public void setSecao(String secao) {
 		this.secao = secao;
+	}
+	
+	public boolean getSecaoEncerrada ()
+	{
+		return this.secaoEncerrada;
 	}
 	
 	public static boolean verificaTituloEleitor (String titulo, ArrayList <Eleitor> eleitores) throws TituloInvalidoException

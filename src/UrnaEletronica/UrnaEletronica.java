@@ -12,28 +12,31 @@ public class UrnaEletronica {
 		int opcao;
 		Scanner in = new Scanner (System.in);
 		MinhasListas listas = new MinhasListas ();
-		CandidatoMenu();
 		
-		System.out.println("Escolha uma das opcoes abaixo: ");
-		System.out.println("1 - Candidatos");
-		System.out.println("2 - Eleitores");
-		System.out.println("3 - Iniciar eleições");
-		System.out.println("4 - Relatorios");
-		System.out.println("0 - SAIR");
-		opcao = in.nextInt();
-		
-		switch (opcao)
+		do
 		{
-			case 1: CandidatoMenu();
-					break;
-			case 2: EleitorMenu(listas);
-					break;
-			case 3: Iniciar(listas);
-					break;
-			case 4: // Produz os relatorios
-				 	break;
-			case 0: System.exit(0);
-			default: System.out.println("Opcao invalida!!!");
+			System.out.println("Escolha uma das opcoes abaixo: ");
+			System.out.println("1 - Candidatos");
+			System.out.println("2 - Eleitores");
+			System.out.println("3 - Iniciar eleições");
+			System.out.println("4 - Relatorios");
+			System.out.println("0 - SAIR");
+			opcao = in.nextInt();
+			
+			switch (opcao)
+			{
+				case 1: CandidatoMenu();
+						break;
+				case 2: EleitorMenu(listas);
+						break;
+				case 3: Iniciar(listas);
+						break;
+				case 4: // Produz os relatorios
+					 	break;
+				case 0: System.exit(0);
+				default: System.out.println("Opcao invalida!!!");
+			}
 		}
+		while (true);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static UrnaEletronica.Eleitor.verificaTituloEleitor;
+import static UrnaEletronica.Eleitor.pesquisaEleitor;
 
 public class IniciarEleicoes 
 {
@@ -19,6 +20,9 @@ public class IniciarEleicoes
 		int numEleitoresSecao;
 		Eleitor presidentes [] = new Eleitor [3];
 		int i;
+		int opcao;
+		int codigo;
+		Eleitor eleitor;
 		
 		try
 		{
@@ -45,5 +49,45 @@ public class IniciarEleicoes
 		{
 			System.out.println("Erro: "+e.toString());
 		}
+		
+		do
+		{
+			System.out.println("Digite uma das opcoes abaixo: ");
+			System.out.println("1 - Zona 001");
+			System.out.println("2 - Encerrar votacao zona 001");
+			System.out.println("3 - Zona 002");
+			System.out.println("4 - Encerrar votacao zona 002");
+			System.out.println("5 - Zona 003");
+			System.out.println("6 - Encerrar votacao zona 003");
+			opcao = in.nextInt();
+			
+			switch (opcao)
+			{
+				case 1: 
+					try
+					{
+						System.out.println("Digite o titulo do eleitor para votacao: ");
+						titulo = in.next();
+						if (verificaTituloEleitor (titulo, listas.eleitores))
+						{
+							eleitor = pesquisaEleitor (titulo, listas.eleitores);
+							if (eleitor.getZona().equals("001"))
+							{
+								System.out.println("Digite o codigo do prefeito: ");
+								codigo = in.nextInt();
+							}
+						}
+					}
+					catch (TituloInvalidoException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					catch (EleitorNaoExistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+			}
+		}
+		while (presidentes[0].getSecaoEncerrada ()==true && presidentes[1].getSecaoEncerrada()==true && presidentes [1].getSecaoEncerrada()==true);	
 	}	
 }
