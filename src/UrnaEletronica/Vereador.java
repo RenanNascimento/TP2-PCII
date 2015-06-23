@@ -1,7 +1,7 @@
 package UrnaEletronica;
 
 public class Vereador extends Candidato{
-
+	
     public Vereador(String nome, String email, String dataNascimento, int codigo) {
         super(nome, email, dataNascimento, codigo);
     }
@@ -26,5 +26,4 @@ public class Vereador extends Candidato{
 		System.out.println("Data de nascimento: "+v.getDataNascimento());
 		System.out.println("------------------------------------");
     }
-    
 }

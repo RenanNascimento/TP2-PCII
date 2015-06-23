@@ -7,6 +7,9 @@ import java.util.Iterator;
 import static UrnaEletronica.Eleitor.verificaTituloEleitor;
 import static UrnaEletronica.Eleitor.pesquisaEleitor;
 import static UrnaEletronica.Prefeito.listarPrefeitoParcial;
+import static UrnaEletronica.Prefeito.verificaCodigoPrefeito;
+import static UrnaEletronica.Vereador.verificaCodigoVereador;
+import static UrnaEletronica.Vereador.listarVereador;
 
 public class IniciarEleicoes 
 {
@@ -25,7 +28,8 @@ public class IniciarEleicoes
 		int codigo;
 		Eleitor eleitor;
 		Prefeito p;
-		Iterator t;
+		Vereador v;
+		Iterator t, h;
 		boolean votou;
 		
 		try
@@ -68,55 +72,73 @@ public class IniciarEleicoes
 				switch (opcao)
 				{
 					case 1: 
-						try
+					t = listas.prefeitos.iterator();
+					h = listas.vereadores.iterator();
+					System.out.println("Digite o titulo do eleitor para votacao: ");
+					titulo = in.next();
+					if (verificaTituloEleitor (titulo, listas.eleitores))
+					{
+						eleitor = pesquisaEleitor (titulo, listas.eleitores);
+						if (eleitor.getZona().equals("001"))
 						{
-							t = listas.prefeitos.iterator();
-							System.out.println("Digite o titulo do eleitor para votacao: ");
-							titulo = in.next();
-							if (verificaTituloEleitor (titulo, listas.eleitores))
-							{
-								eleitor = pesquisaEleitor (titulo, listas.eleitores);
-								if (eleitor.getZona().equals("001"))
-								{
-									votou = false;
-									p = null;
-									while(votou==false){
-										System.out.println("Digite o codigo do prefeito: ");
-										System.out.println("Caso 99 - BRANCO");
-										codigo = in.nextInt();
-										if(codigo == 99){
-											relatorio.setVotoBranco();
-											votou=true;
-											break;
-										}
-										while(t.hasNext()){
-											p = (Prefeito) t.next();
-											if(codigo == p.getCodigo()){
-												listarPrefeitoParcial(p);
-												break;
-											}
-										}
-										System.out.println("Voce realmente deseja votar nesse prefeito (1-Sim/0-Nao): ");
-										opcaoVotar = in.nextInt();
-										if(opcaoVotar == 1){
-											p.setNumVotosTotal();
-											p.setNumVotosZona001();
-											votou = true;
-										}else{
-											votou = false;
-										}
+							votou = false;
+							p = null;
+							while(votou==false){
+								System.out.println("Digite o codigo do prefeito: ");
+								System.out.println("Caso 99 - BRANCO");
+								codigo = in.nextInt();
+								verificaCodigoPrefeito (codigo);
+								if(codigo == 99){
+									relatorio.setVotoBrancoPrefeito();
+									votou=true;
+									break;
+								}
+								while(t.hasNext()){
+									p = (Prefeito) t.next();
+									if(codigo == p.getCodigo()){
+										listarPrefeitoParcial(p);
+										break;
 									}
+								}
+								System.out.println("Voce realmente deseja votar nesse prefeito (1-Sim/0-Nao): ");
+								opcaoVotar = in.nextInt();
+								if(opcaoVotar == 1){
+									p.setNumVotosTotal();
+									p.setNumVotosZona001();
+									votou = true;
+								}else{
+									votou = false;
+								}
+							}
+							votou = false;
+							v = null;
+							System.out.println("Digite o codigo vererador: ");
+							System.out.println("Caso 9999 - BRANCO");
+							codigo = in.nextInt();
+							verificaCodigoVereador (codigo);
+							if (codigo == 9999){
+								relatorio.setVotoBrancoVereador();
+								votou=true;
+								break;
+							}
+							while(h.hasNext()){
+								v = (Vereador) h.next();
+								if (codigo == v.getCodigo()) {
+									listarVereador (v);
+									break;
+								}
+								System.out.println("Voce realmente deseja votar nesse vereador (1-Sim/0-Nao): ");
+								opcaoVotar = in.nextInt();
+								if(opcaoVotar == 1){
+									v.setNumVotosTotal();
+									v.setNumVotosZona001();
+									votou = true;
+								}else{
+									votou = false;
 								}
 							}
 						}
-						catch (TituloInvalidoException e)
-						{
-							System.out.println("Erro: "+e.toString());
-						}
-						catch (EleitorNaoExistenteException e)
-						{
-							System.out.println("Erro: "+e.toString());
-						}
+					}
 				}
 			}
 			while (presidentes[0].getSecaoEncerrada ()==true && presidentes[1].getSecaoEncerrada()==true && presidentes [1].getSecaoEncerrada()==true);	
@@ -130,6 +152,13 @@ public class IniciarEleicoes
 		{
 			System.out.println("Erro: "+e.toString());
 		}
-		
+		catch (EleitorNaoExistenteException e)
+		{
+			System.out.println("Erro: "+e.toString());
+		}
+		catch (CodigoInvalidoException e)
+		{
+			System.out.println("Erro: "+e.toString());
+		}
 	}	
 }

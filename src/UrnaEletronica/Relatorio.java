@@ -11,28 +11,37 @@ public class Relatorio {
 	private int codigo, qtdeVotos, qtdeVotosZona_1, qtdeVotosZona_2, qtdeVotosZona_3;
 	private Iterator i;
 	private Relatorio r_aux;
-	private int votoBranco;
+	private int votoBrancoPrefeito, votoBrancoVereador;
 	
-	public Relatorio (int codigo){
+	public Relatorio (){
 		
-		this.codigo = codigo;
+		this.codigo = 0;
 		this.qtdeVotos = 0;
 		this.qtdeVotosZona_1 = 0;
 		this.qtdeVotosZona_2 = 0;
 		this.qtdeVotosZona_3 = 0;
-		this.votoBranco = 0;
+		this.votoBrancoPrefeito = 0;
+		this.votoBrancoVereador = 0;
 	}
 	
-	public void setVotoBranco (){
+	public void setVotoBrancoPrefeito (){
 		
-		this.votoBranco++;
-		
+		this.votoBrancoPrefeito++;
 	}
 	
-	public int getVotoBranco (){
+	public void setVotoBrancoVereador (){
 		
-		return votoBranco;
+		this.votoBrancoVereador++;
+	}
+	
+	public int getVotoBrancoPrefeito (){
 		
+		return votoBrancoPrefeito;
+	}
+	
+	public int getVotoBrancoVereador (){
+		
+		return votoBrancoVereador;
 	}
 	
 	public void setVotos (int codigo, String zona, ArrayList<Relatorio> r){
