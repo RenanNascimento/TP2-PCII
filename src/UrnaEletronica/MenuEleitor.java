@@ -143,8 +143,7 @@ public class MenuEleitor
 							nome = in.next();
 							eleitor = pesquisaEleitorNome (nome, listas.eleitores);
 							imprimeEleitorCompleta (eleitor);
-						}
-					}
+						}					}
 					catch (InexistenteException e)
 					{
 						System.out.println("Erro: "+e.toString());

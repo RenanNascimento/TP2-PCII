@@ -78,6 +78,11 @@ public class Eleitor
 		return this.secaoEncerrada;
 	}
 	
+	public void setSecaoEncerrada (boolean secaoEncerrada)
+	{
+		this.secaoEncerrada = secaoEncerrada;
+	}
+	
 	public static boolean verificaTituloEleitor (String titulo, ArrayList <Eleitor> eleitores) throws TituloInvalidoException
 	{
 		int i;
