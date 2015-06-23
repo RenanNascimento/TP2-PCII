@@ -6,10 +6,11 @@ import java.util.Iterator;
 
 import static UrnaEletronica.Eleitor.verificaTituloEleitor;
 import static UrnaEletronica.Eleitor.pesquisaEleitor;
+import static UrnaEletronica.Prefeito.listarPrefeitoParcial;
 
 public class IniciarEleicoes 
 {
-	public static void Iniciar (MinhasListas listas)
+	public static void Iniciar (MinhasListas listas, Relatorio relatorio)
 	{
 		Scanner in = new Scanner (System.in);
 		String nome;
@@ -20,9 +21,12 @@ public class IniciarEleicoes
 		int numEleitoresSecao;
 		Eleitor presidentes [] = new Eleitor [3];
 		int i;
-		int opcao;
+		int opcao, opcaoVotar;
 		int codigo;
 		Eleitor eleitor;
+		Prefeito p;
+		Iterator t;
+		boolean votou;
 		
 		try
 		{
@@ -66,6 +70,7 @@ public class IniciarEleicoes
 					case 1: 
 						try
 						{
+							t = listas.prefeitos.iterator();
 							System.out.println("Digite o titulo do eleitor para votacao: ");
 							titulo = in.next();
 							if (verificaTituloEleitor (titulo, listas.eleitores))
@@ -73,8 +78,34 @@ public class IniciarEleicoes
 								eleitor = pesquisaEleitor (titulo, listas.eleitores);
 								if (eleitor.getZona().equals("001"))
 								{
-									System.out.println("Digite o codigo do prefeito: ");
-									codigo = in.nextInt();
+									votou = false;
+									p = null;
+									while(votou==false){
+										System.out.println("Digite o codigo do prefeito: ");
+										System.out.println("Caso 99 - BRANCO");
+										codigo = in.nextInt();
+										if(codigo == 99){
+											relatorio.setVotoBranco();
+											votou=true;
+											break;
+										}
+										while(t.hasNext()){
+											p = (Prefeito) t.next();
+											if(codigo == p.getCodigo()){
+												listarPrefeitoParcial(p);
+												break;
+											}
+										}
+										System.out.println("Voce realmente deseja votar nesse prefeito (1-Sim/0-Nao): ");
+										opcaoVotar = in.nextInt();
+										if(opcaoVotar == 1){
+											p.setNumVotosTotal();
+											p.setNumVotosZona001();
+											votou = true;
+										}else{
+											votou = false;
+										}
+									}
 								}
 							}
 						}

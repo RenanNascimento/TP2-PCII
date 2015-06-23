@@ -12,6 +12,7 @@ public class UrnaEletronica {
 		int opcao;
 		Scanner in = new Scanner (System.in);
 		MinhasListas listas = new MinhasListas ();
+		Relatorio relatorio = new Relatorio ();
 		
 		do
 		{
@@ -25,11 +26,11 @@ public class UrnaEletronica {
 			
 			switch (opcao)
 			{
-				case 1: CandidatoMenu();
+				case 1: CandidatoMenu(listas);
 						break;
 				case 2: EleitorMenu(listas);
 						break;
-				case 3: Iniciar(listas);
+				case 3: Iniciar(listas,relatorio);
 						break;
 				case 4: // Produz os relatorios
 					 	break;

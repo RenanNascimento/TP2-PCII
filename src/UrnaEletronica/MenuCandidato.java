@@ -13,12 +13,9 @@ import static UrnaEletronica.Vereador.listarVereador;
 public class MenuCandidato 
 {
 	
-	public static void CandidatoMenu(){
+	public static void CandidatoMenu(MinhasListas listas){
 
 		Scanner in = new Scanner(System.in);
-		
-		ArrayList<Prefeito> prefeitos = new ArrayList<Prefeito>();
-		ArrayList<Vereador> vereadores = new ArrayList<Vereador>();
 		
 		Iterator i, j;
 		
@@ -81,7 +78,7 @@ public class MenuCandidato
 		    						
 		    						//Verifica se o codigo ja existe
 		    						confirma = 0;
-		    						i = prefeitos.iterator();
+		    						i = listas.prefeitos.iterator();
 		    						while(i.hasNext()){
 		    							p = (Prefeito) i.next();
 		    							if(codigo == p.getCodigo()){
@@ -93,7 +90,7 @@ public class MenuCandidato
 		    						if(verificaCodigoPrefeito(codigo) && confirma == 0){
 		    							vP = new VicePrefeito(nomeVicePrefeito, emailVicePrefeito, dataNascimentoVicePrefeito, codigo);
 		    							p = new Prefeito(nome, email, dataNascimento, codigo, vP);
-		    							prefeitos.add(p);
+		    							listas.prefeitos.add(p);
 		    						}
 	    						
 	    						}
@@ -108,7 +105,7 @@ public class MenuCandidato
 	    					
 	    					case 2:
 	    						try{
-	    							i = prefeitos.iterator();
+	    							i = listas.prefeitos.iterator();
 	    							if(i.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Prefeito");
 	    							}
@@ -122,14 +119,14 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==prefeitos.size()){
+			    						if(index==listas.prefeitos.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Prefeito!!!");
 			    						}
 			    						else{
 			    							System.out.println("");
 			    							System.out.println("Voce realmente deseja excluir esse Prefeito? 1-Sim/0-Nao"); confirma = in.nextInt();
 			    							if(confirma == 1){
-			    								prefeitos.remove(index);
+			    								listas.prefeitos.remove(index);
 			    							}
 			    						}
 	    							}
@@ -141,12 +138,12 @@ public class MenuCandidato
 	    						
 	    					case 3:
 	    						try{
-	    							i = prefeitos.iterator();
+	    							i = listas.prefeitos.iterator();
 	    							if(i.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Prefeito");
 	    							}
 	    							else{
-			    						i = prefeitos.iterator();
+			    						i = listas.prefeitos.iterator();
 			    						while(i.hasNext()){
 			    							p = (Prefeito) i.next();
 			    							listarPrefeitoParcial(p);
@@ -160,7 +157,7 @@ public class MenuCandidato
 	    					
 	    					case 4:
 	    						try{
-	    							i = prefeitos.iterator();
+	    							i = listas.prefeitos.iterator();
 	    							if(i.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Prefeito");
 	    							}
@@ -174,7 +171,7 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==prefeitos.size()){
+			    						if(index==listas.prefeitos.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Prefeito!!!");
 			    						}
 		    						}
@@ -186,7 +183,7 @@ public class MenuCandidato
 	    					
 	    					case 5:
 	    						try{
-	    							i = prefeitos.iterator();
+	    							i = listas.prefeitos.iterator();
 	    							if(i.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Prefeito");
 	    							}
@@ -213,7 +210,7 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==prefeitos.size()){
+			    						if(index==listas.prefeitos.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Prefeito!!!");
 			    						}
 	    							}
@@ -263,7 +260,7 @@ public class MenuCandidato
 		    						
 		    						//Verifica se o codigo ja existe
 		    						confirma = 0;
-		    						j = vereadores.iterator();
+		    						j = listas.vereadores.iterator();
 		    						while(j.hasNext()){
 		    							v = (Vereador) j.next();
 		    							if(codigo == v.getCodigo()){
@@ -274,7 +271,7 @@ public class MenuCandidato
 		    						
 		    						if(verificaCodigoVereador(codigo) && confirma == 0){
 		    							v = new Vereador(nome, email, dataNascimento, codigo);
-		    							vereadores.add(v);
+		    							listas.vereadores.add(v);
 		    						}
 	    						
 	    						}
@@ -289,7 +286,7 @@ public class MenuCandidato
 	    					
 	    					case 2:
 	    						try{
-	    							j = vereadores.iterator();
+	    							j = listas.vereadores.iterator();
 	    							if(j.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Vereador");
 	    							}
@@ -303,14 +300,14 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==vereadores.size()){
+			    						if(index==listas.vereadores.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Vereador!!!");
 			    						}
 			    						else{
 			    							System.out.println("");
 			    							System.out.println("Voce realmente deseja excluir esse Vereador? 1-Sim/0-Nao"); confirma = in.nextInt();
 			    							if(confirma == 1){
-			    								vereadores.remove(index);
+			    								listas.vereadores.remove(index);
 			    							}
 			    						}
 	    							}
@@ -322,12 +319,12 @@ public class MenuCandidato
 	    						
 	    					case 3:
 	    						try{
-	    							j = vereadores.iterator();
+	    							j = listas.vereadores.iterator();
 	    							if(j.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Vereador");
 	    							}
 	    							else{
-			    						j = vereadores.iterator();
+			    						j = listas.vereadores.iterator();
 			    						while(j.hasNext()){
 			    							v = (Vereador) j.next();
 			    							listarVereador(v);
@@ -341,7 +338,7 @@ public class MenuCandidato
 	    					
 	    					case 4:
 	    						try{
-	    							j = vereadores.iterator();
+	    							j = listas.vereadores.iterator();
 	    							if(j.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Vereador");
 	    							}
@@ -355,7 +352,7 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==vereadores.size()){
+			    						if(index==listas.vereadores.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Vereador!!!");
 			    						}
 		    						}
@@ -367,7 +364,7 @@ public class MenuCandidato
 	    					
 	    					case 5:
 	    						try{
-	    							j = vereadores.iterator();
+	    							j = listas.vereadores.iterator();
 	    							if(j.hasNext() == false){
 	    								throw new InexistenteException ("Não existe nenhum Vereador");
 	    							}
@@ -391,7 +388,7 @@ public class MenuCandidato
 			    								break;
 			    							}
 			    						}
-			    						if(index==vereadores.size()){
+			    						if(index==listas.vereadores.size()){
 			    							throw new InexistenteException ("O codigo pesquisado nao faz referencia a um Vereador!!!");
 			    						}
 	    							}

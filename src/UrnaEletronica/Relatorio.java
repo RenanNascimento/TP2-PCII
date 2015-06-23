@@ -11,6 +11,7 @@ public class Relatorio {
 	private int codigo, qtdeVotos, qtdeVotosZona_1, qtdeVotosZona_2, qtdeVotosZona_3;
 	private Iterator i;
 	private Relatorio r_aux;
+	private int votoBranco;
 	
 	public Relatorio (int codigo){
 		
@@ -19,6 +20,18 @@ public class Relatorio {
 		this.qtdeVotosZona_1 = 0;
 		this.qtdeVotosZona_2 = 0;
 		this.qtdeVotosZona_3 = 0;
+		this.votoBranco = 0;
+	}
+	
+	public void setVotoBranco (){
+		
+		this.votoBranco++;
+		
+	}
+	
+	public int getVotoBranco (){
+		
+		return votoBranco;
 		
 	}
 	
