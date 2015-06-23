@@ -51,16 +51,26 @@ public class MenuEleitor
 						titulo = in.next();
 						verificaTituloEleitor (titulo, listas.eleitores);
 						System.out.println("Digite a zona do eleitor: ");
+						System.out.println("Zonas disponiveis - 001 - 002 - 003");
 						zona = in.next();
-						System.out.println("Digite a secao do eleitor: ");
-						secao = in.next();
-						eleitor = new Eleitor (nome, dataDeNascimento, titulo, zona, secao);
-						listas.eleitores.add(eleitor);
+						if(zona.equals("001") || zona.equals("002") || zona.equals("003")){
+							System.out.println("Digite a secao do eleitor: ");
+							secao = in.next();
+							eleitor = new Eleitor (nome, dataDeNascimento, titulo, zona, secao);
+							listas.eleitores.add(eleitor);
+						}else{
+							throw new ZonaInvalidaException ("Zona invalida!!!");
+						}
 					}
 					catch (TituloInvalidoException e)
 					{
 						System.out.println("Erro: "+e.toString());
 					}
+					catch (ZonaInvalidaException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+
 					break;
 			
 			case 2: try
