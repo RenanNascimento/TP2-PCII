@@ -51,12 +51,18 @@ public class IniciarEleicoes
 					System.out.println("Digite a hora de abertura da secao: ");
 					horaAbertura = in.next();
 					System.out.println("Digite o numero de eleitores da secao: ");
+					System.out.println("---------------------------------------");
+					System.out.println("");
 					numEleitoresSecao = in.nextInt();
 					presidentes [i] = new Eleitor (nome, titulo, zona, secao, horaAbertura, numEleitoresSecao);
-					listas.eleitores.add(presidentes [i]);
 				}else{
 					throw new ZonaInvalidaException ("Zona invalida!!!");
 				}
+			}
+			
+			for (i=0; i<3; i++)
+			{
+				listas.eleitores.add(presidentes [i]);
 			}
 			
 			do
