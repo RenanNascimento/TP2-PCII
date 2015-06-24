@@ -66,4 +66,71 @@ public class Relatorio {
 		
 	}
 	
+	public static void prefeitoMaisMenosVotos (ArrayList<Prefeito> p, String x){
+		
+		int i;
+		int maisVotos = p.get(0).getNumVotosTotal();
+		int menosVotos = p.get(0).getNumVotosTotal();
+		
+		for(i=0; i<p.size(); i++){
+			if(p.get(i).getNumVotosTotal() > maisVotos && x.equals("+")){
+				maisVotos = p.get(i).getNumVotosTotal();
+			}
+			if(p.get(i).getNumVotosTotal() < menosVotos && x.equals("-")){
+				menosVotos = p.get(i).getNumVotosTotal();
+			}
+		}
+		
+		for(i=0; i<p.size(); i++){
+			if(p.get(i).getNumVotosTotal() == maisVotos && x.equals("+")){
+				System.out.println("Nome: "+p.get(i).getNome());
+				System.out.println("Codigo: "+p.get(i).getCodigo());
+				System.out.println("Nome Vice-Prefeito: "+p.get(i).vicePrefeito.getNome()); 
+				System.out.println("Total de votos: "+p.get(i).getNumVotosTotal());
+				break;
+			}
+			if(p.get(i).getNumVotosTotal() == maisVotos && x.equals("-")){
+				System.out.println("Nome: "+p.get(i).getNome());
+				System.out.println("Codigo: "+p.get(i).getCodigo());
+				System.out.println("Nome Vice-Prefeito: "+p.get(i).vicePrefeito.getNome()); 
+				System.out.println("Total de votos: "+p.get(i).getNumVotosTotal());
+				break;				
+			}
+		}
+		
+	}
+
+	public static void vereadorMaisMenosVotos (ArrayList<Vereador> v, String x){
+		
+		int i;
+		int maisVotos = v.get(0).getNumVotosTotal();
+		int menosVotos = v.get(0).getNumVotosTotal();
+		
+		for(i=0; i<v.size(); i++){
+			if(v.get(i).getNumVotosTotal() > maisVotos && x.equals("+")){
+				maisVotos = v.get(i).getNumVotosTotal();
+			}
+			if(v.get(i).getNumVotosTotal() < menosVotos && x.equals("-")){
+				menosVotos = v.get(i).getNumVotosTotal();
+			}
+		}
+		
+		for(i=0; i<v.size(); i++){
+			if(v.get(i).getNumVotosTotal() == maisVotos && x.equals("+")){
+				System.out.println("Nome: "+v.get(i).getNome());
+				System.out.println("Codigo: "+v.get(i).getCodigo()); 
+				System.out.println("Total de votos: "+v.get(i).getNumVotosTotal());
+				break;
+			}
+			if(v.get(i).getNumVotosTotal() == maisVotos && x.equals("-")){
+				System.out.println("Nome: "+v.get(i).getNome());
+				System.out.println("Codigo: "+v.get(i).getCodigo()); 
+				System.out.println("Total de votos: "+v.get(i).getNumVotosTotal());
+				break;				
+			}
+		}
+		
+	}
+
+	
 }

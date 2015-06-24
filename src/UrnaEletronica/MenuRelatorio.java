@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import static UrnaEletronica.Relatorio.listarVotosPrefeito;
 import static UrnaEletronica.Relatorio.listarVotosVereador;
+import static UrnaEletronica.Relatorio.prefeitoMaisMenosVotos;
+import static UrnaEletronica.Relatorio.vereadorMaisMenosVotos;
 
 public class MenuRelatorio {
 
@@ -74,6 +76,22 @@ public class MenuRelatorio {
 	    			System.out.println("Qtde votos branco vereador: "+relatorio.getVotoBrancoVereador());
 	    			break;
 	    			
+	    		case 6:
+	    			prefeitoMaisMenosVotos(listas.prefeitos,"+");
+	    			break;
+	    			
+	    		case 7:
+	    			prefeitoMaisMenosVotos(listas.prefeitos,"-");
+	    			break;
+	    			
+	    		case 8:
+	    			vereadorMaisMenosVotos(listas.vereadores,"+");
+	    			break;
+	    			
+	    		case 9:
+	    			vereadorMaisMenosVotos(listas.vereadores,"-");
+	    			break;
+	    		
 	    		default:
 					if(opcao!=0){
 						System.out.println("Opcao invalida!!!");
