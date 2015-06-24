@@ -1,5 +1,7 @@
 package UrnaEletronica;
 
+import java.util.ArrayList;
+
 public class Prefeito extends Candidato
 {
 	
@@ -49,4 +51,16 @@ public class Prefeito extends Candidato
 		System.out.println("------------------------------------");
 	
     }
+    
+    public static boolean validacaoCodigoPrefeito (int codigo, ArrayList <Prefeito> prefeitos) throws CodigoInvalidoException
+	{
+		int i;
+		
+		for (i=0; i<prefeitos.size(); i++){
+			if (codigo == prefeitos.get(i).getCodigo())
+				return true;
+		}
+		throw new CodigoInvalidoException ("Prefeito inexistente!!!");
+
+	}
 }

@@ -61,6 +61,7 @@ public class UrnaEletronica {
 					{
 						System.out.println("Erro: "+e.toString());
 					}
+					break;
 					
 				case 4:
 					try{
@@ -91,6 +92,7 @@ public class UrnaEletronica {
 					{
 						System.out.println("Erro: "+e.toString());
 					}
+					break;
 
 				default:
 					if(opcao!=0)

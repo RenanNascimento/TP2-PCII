@@ -1,5 +1,7 @@
 package UrnaEletronica;
 
+import java.util.ArrayList;
+
 public class Vereador extends Candidato{
 	
     public Vereador(String nome, String email, String dataNascimento, int codigo) {
@@ -26,4 +28,16 @@ public class Vereador extends Candidato{
 		System.out.println("Data de nascimento: "+v.getDataNascimento());
 		System.out.println("------------------------------------");
     }
+    
+    public static boolean validacaoCodigoVereador (int codigo, ArrayList <Vereador> vereadores) throws CodigoInvalidoException
+	{
+		int i;
+		
+		for (i=0; i<vereadores.size(); i++){
+			if (codigo == vereadores.get(i).getCodigo())
+				return true;
+		}
+		throw new CodigoInvalidoException ("Vereador inexistente!!!");
+
+	}
 }

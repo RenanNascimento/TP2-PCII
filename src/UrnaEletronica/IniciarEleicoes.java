@@ -11,6 +11,8 @@ import static UrnaEletronica.Prefeito.verificaCodigoPrefeito;
 import static UrnaEletronica.Vereador.verificaCodigoVereador;
 import static UrnaEletronica.Vereador.listarVereador;
 import static UrnaEletronica.Eleitor.validacaoTituloEleitor;
+import static UrnaEletronica.Prefeito.validacaoCodigoPrefeito;
+import static UrnaEletronica.Vereador.validacaoCodigoVereador;
 
 public class IniciarEleicoes 
 {
@@ -125,7 +127,7 @@ public class IniciarEleicoes
 												votou=true;
 												break;
 											}else{
-												verificaCodigoPrefeito (codigo);
+												validacaoCodigoPrefeito (codigo, listas.prefeitos);
 											
 												while(t.hasNext()){
 													p = (Prefeito) t.next();
@@ -160,7 +162,7 @@ public class IniciarEleicoes
 												votou=true;
 												break;
 											}else{
-												verificaCodigoVereador (codigo);
+												validacaoCodigoVereador (codigo, listas.vereadores);
 
 												while(h.hasNext()){
 													v = (Vereador) h.next();
@@ -232,6 +234,7 @@ public class IniciarEleicoes
 						{
 							System.out.println("Erro: "+e.toString());
 						}
+						break;
 
 					case 3:
 						try{
@@ -355,6 +358,7 @@ public class IniciarEleicoes
 						{
 							System.out.println("Erro: "+e.toString());
 						}
+						break;
 						
 					case 5:
 						try{
@@ -476,11 +480,12 @@ public class IniciarEleicoes
 						{
 							System.out.println("Erro: "+e.toString());
 						}
+						break;
 
 					default: System.out.println("Opcao invalida!!!");
 				}
 			}
-			while (presidentes[0].getSecaoEncerrada ()==false || presidentes[1].getSecaoEncerrada()==false || presidentes [1].getSecaoEncerrada()==false);	
+			while (presidentes[0].getSecaoEncerrada ()==false || presidentes[1].getSecaoEncerrada()==false || presidentes [2].getSecaoEncerrada()==false);	
 		}
 	}	
 }
