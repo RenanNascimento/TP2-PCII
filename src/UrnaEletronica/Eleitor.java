@@ -12,6 +12,8 @@ public class Eleitor
 	protected String horaAbertura, horaEncerramento;
 	protected int numEleitoresSecao;
 	protected boolean secaoEncerrada;
+	protected boolean votouPrefeito;
+	protected boolean votouVereador;
 	
 	public Eleitor (String nome, String dataDeNascimento, String titulo, String zona, String secao) 
 	{
@@ -20,6 +22,8 @@ public class Eleitor
 		this.titulo = titulo;
 		this.zona = zona;
 		this.secao = secao;
+		this.votouPrefeito = false;
+		this.votouVereador = false;
 	}
 	
 	public Eleitor (String nome, String titulo, String zona, String secao, String horaAbertura, int numEleitoresSecao)
@@ -32,6 +36,8 @@ public class Eleitor
 		this.horaEncerramento = "";
 		this.numEleitoresSecao = numEleitoresSecao;
 		this.secaoEncerrada = false;
+		this.votouPrefeito = false;
+		this.votouVereador = false;
 	}
 
 	public String getNome() {
@@ -90,6 +96,26 @@ public class Eleitor
 	
 	public String getHoraEncerramento(){
 		return horaEncerramento;
+	}
+	
+	public boolean getVotouPrefeito ()
+	{
+		return this.votouPrefeito;
+	}
+	
+	public void setVotouPrefeito (boolean votouPrefeito)
+	{
+		this.votouPrefeito = votouPrefeito;
+	}
+	
+	public boolean getVotouVeredor ()
+	{
+		return this.votouVereador;
+	}
+	
+	public void setVotouVereador (boolean votouVereador)
+	{
+		this.votouVereador = votouVereador;
 	}
 	
 	public static boolean verificaTituloEleitor (String titulo, ArrayList <Eleitor> eleitores) throws TituloInvalidoException
