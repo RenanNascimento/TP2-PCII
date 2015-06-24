@@ -8,18 +8,10 @@ import static UrnaEletronica.Prefeito.listarPrefeitoCompleto;
 public class Relatorio {
 
 	
-	private int codigo, qtdeVotos, qtdeVotosZona_1, qtdeVotosZona_2, qtdeVotosZona_3;
-	private Iterator i;
-	private Relatorio r_aux;
 	private int votoBrancoPrefeito, votoBrancoVereador;
 	
 	public Relatorio (){
 		
-		this.codigo = 0;
-		this.qtdeVotos = 0;
-		this.qtdeVotosZona_1 = 0;
-		this.qtdeVotosZona_2 = 0;
-		this.qtdeVotosZona_3 = 0;
 		this.votoBrancoPrefeito = 0;
 		this.votoBrancoVereador = 0;
 	}
@@ -43,72 +35,33 @@ public class Relatorio {
 		
 		return votoBrancoVereador;
 	}
-	
-	public void setVotos (int codigo, String zona, ArrayList<Relatorio> r){
+
+	public static void listarVotosPrefeito (Prefeito p, int aux){
 		
-		i = r.iterator();
-		while(i.hasNext()){
-			r_aux = (Relatorio) i.next();
-			if(codigo == r_aux.getCodigo()){
-				qtdeVotos++;
-				if(zona.equals("001")){
-					qtdeVotosZona_1++;
-				}else{
-					if(zona.equals("002")){
-						qtdeVotosZona_2++;
-					}else{
-						qtdeVotosZona_3++;
-					}
-				}
-			}	
+		System.out.println("Nome: "+p.getNome());
+		System.out.println("Codigo: "+p.getCodigo());
+		System.out.println("Nome Vice-Prefeito: "+p.vicePrefeito.getNome()); 
+		System.out.println("Total de votos: "+p.getNumVotosTotal());
+		if(aux==1){
+			System.out.println("Total de votos zona 001: "+p.getNumVotosZona001());
+			System.out.println("Total de votos zona 002: "+p.getNumVotosZona002());
+			System.out.println("Total de votos zona 003: "+p.getNumVotosZona003());
 		}
-		
+		System.out.println("-----------------------------");
 	}
 	
-	public void listarRelatorio (ArrayList<Relatorio> r){
+	public static void listarVotosVereador (Vereador v, int aux){
 		
-		i = r.iterator();
-		while(i.hasNext()){
-			r_aux = (Relatorio) i.next();
-			if(r_aux.getCodigo()>=10 && r_aux.getCodigo()<=98){ //trata-se do prefeito
-				System.out.println("Prefeito ");
-				System.out.println("");
-			}else{
-				
-			}
+		System.out.println("Nome: "+v.getNome());
+		System.out.println("Codigo: "+v.getCodigo());
+		System.out.println("Total de votos: "+v.getNumVotosTotal());
+		if(aux==1){
+			System.out.println("Total de votos zona 001: "+v.getNumVotosZona001());
+			System.out.println("Total de votos zona 002: "+v.getNumVotosZona002());
+			System.out.println("Total de votos zona 003: "+v.getNumVotosZona003());
 		}
-		
-	}
-	
-	public int getCodigo (){
-		
-		return codigo;
-		
-	}
-	
-	public int getQtdeVotos (){
-		
-		return qtdeVotos;
-		
-	}
-	
-	public int getQtdeVotosZona_1 (){
-		
-		return qtdeVotosZona_1;
-		
-	}
-	
-	public int getQtdeVotosZona_2 (){
-		
-		return qtdeVotosZona_2;
-	
-	}
-	
-	public int getQtdeVotosZona_3 (){
-		
-		return qtdeVotosZona_3;
+		System.out.println("-----------------------------");
 		
 	}
 	
 }
-

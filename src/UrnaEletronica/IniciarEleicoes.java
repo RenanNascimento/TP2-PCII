@@ -20,7 +20,7 @@ public class IniciarEleicoes
 		String titulo;
 		String zona;
 		String secao;
-		String horaAbertura;
+		String horaAbertura, horaEncerramento;
 		int numEleitoresSecao;
 		Eleitor presidentes [] = new Eleitor [3];
 		int i;
@@ -148,13 +148,23 @@ public class IniciarEleicoes
 					break; // Fim do case 1
 					
 					case 2:
-						System.out.println("Voce realmente deseja encerrar a votacao na zona 001? 1-Sim/0-Nao");
-						confirmaFechamento = in.nextInt();
-						if (confirmaFechamento==1)
-							presidentes [0].setSecaoEncerrada(true);
-						else
-							System.out.println("Voce optou por nao encerrar a votacao na zona 001");
-						break; // Fim do case 2
+						System.out.println("Para encerrar a votacao da zona 001 digite o titulo do presidente da zona: "); 
+						titulo = in.next();
+						if(titulo.equals(presidentes[0].getTitulo())){
+							System.out.println("Voce realmente deseja encerrar a votacao na zona 001? 1-Sim/0-Nao");
+							confirmaFechamento = in.nextInt();
+							if (confirmaFechamento==1){
+								System.out.println("Digite o horario de encerramento: "); horaEncerramento = in.next();
+								presidentes [0].setSecaoEncerrada(true);
+								presidentes [0].setHoraEncerramento(horaEncerramento);
+							}
+							else{
+								System.out.println("Voce optou por nao encerrar a votacao na zona 001");
+							}
+							break;
+						}else{
+							throw new TituloInvalidoException ("Titulo invalido!!!");
+						}
 					
 					case 3:
 						if (presidentes[1].getSecaoEncerrada ()==true)
@@ -191,7 +201,7 @@ public class IniciarEleicoes
 										opcaoVotar = in.nextInt();
 										if(opcaoVotar == 1){
 											p.setNumVotosTotal();
-											p.setNumVotosZona001();
+											p.setNumVotosZona002();
 											votou = true;
 										}else{
 											votou = false;
@@ -218,7 +228,7 @@ public class IniciarEleicoes
 										opcaoVotar = in.nextInt();
 										if(opcaoVotar == 1){
 											v.setNumVotosTotal();
-											v.setNumVotosZona001();
+											v.setNumVotosZona002();
 											votou = true;
 										}else{
 											votou = false;
@@ -232,14 +242,23 @@ public class IniciarEleicoes
 						break; // Fim do case 003
 						
 					case 4:
-						System.out.println("Voce realmente deseja encerrar a votacao na zona 002? 1-Sim/0-Nao");
-						confirmaFechamento = in.nextInt();
-						if (confirmaFechamento==1)
-							presidentes [1].setSecaoEncerrada(true);
-						else
-							System.out.println("Voce optou por nao encerrar a votacao na zona 002");
-						break; // Fim do case 4
-					
+						System.out.println("Para encerrar a votacao da zona 002 digite o titulo do presidente da zona: "); 
+						titulo = in.next();
+						if(titulo.equals(presidentes[1].getTitulo())){
+							System.out.println("Voce realmente deseja encerrar a votacao na zona 002? 1-Sim/0-Nao");
+							confirmaFechamento = in.nextInt();
+							if (confirmaFechamento==1){
+								System.out.println("Digite o horario de encerramento: "); horaEncerramento = in.next();
+								presidentes [1].setSecaoEncerrada(true);
+								presidentes [1].setHoraEncerramento(horaEncerramento);
+							}
+							else{
+								System.out.println("Voce optou por nao encerrar a votacao na zona 002");
+							}
+							break; 
+						}else{
+							throw new TituloInvalidoException ("Titulo invalido!!!");
+						}
 					case 5:
 						if (presidentes[2].getSecaoEncerrada ()==true)
 						{
@@ -275,7 +294,7 @@ public class IniciarEleicoes
 										opcaoVotar = in.nextInt();
 										if(opcaoVotar == 1){
 											p.setNumVotosTotal();
-											p.setNumVotosZona001();
+											p.setNumVotosZona003();
 											votou = true;
 										}else{
 											votou = false;
@@ -302,7 +321,7 @@ public class IniciarEleicoes
 										opcaoVotar = in.nextInt();
 										if(opcaoVotar == 1){
 											v.setNumVotosTotal();
-											v.setNumVotosZona001();
+											v.setNumVotosZona003();
 											votou = true;
 										}else{
 											votou = false;
@@ -316,13 +335,22 @@ public class IniciarEleicoes
 						break; // Fim do case 5
 						
 					case 6: 
-						System.out.println("Voce realmente deseja encerrar a votacao na zona 003? 1-Sim/0-Nao");
-						confirmaFechamento = in.nextInt();
-						if (confirmaFechamento==1)
-							presidentes [2].setSecaoEncerrada(true);
-						else
-							System.out.println("Voce optou por nao encerrar a votacao na zona 003");
-						break; // Fim do case 6
+						System.out.println("Para encerrar a votacao da zona 003 digite o titulo do presidente da zona: "); 
+						titulo = in.next();
+						if(titulo.equals(presidentes[2].getTitulo())){
+							System.out.println("Voce realmente deseja encerrar a votacao na zona 003? 1-Sim/0-Nao");
+							confirmaFechamento = in.nextInt();
+							if (confirmaFechamento==1){
+								System.out.println("Digite o horario de encerramento: "); horaEncerramento = in.next();
+								presidentes [2].setSecaoEncerrada(true);
+								presidentes [2].setHoraEncerramento(horaEncerramento);
+							}else{
+								System.out.println("Voce optou por nao encerrar a votacao na zona 003");
+							}
+							break; 
+						}else{
+							throw new TituloInvalidoException ("Titulo invalido!!!");
+						}
 					default: System.out.println("Opcao invalida!!!");
 				}
 			}
