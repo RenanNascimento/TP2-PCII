@@ -19,24 +19,24 @@ public class UrnaEletronica {
 		Relatorio relatorio = new Relatorio ();
 		boolean votou=false;
 		
-		try{
-			do
+		do
+		{
+			System.out.println("Escolha uma das opcoes abaixo: ");
+			System.out.println("1 - Candidatos");
+			System.out.println("2 - Eleitores");
+			System.out.println("3 - Iniciar eleições");
+			System.out.println("4 - Relatorios");
+			System.out.println("0 - SAIR");
+			opcao = in.nextInt();
+			
+			switch (opcao)
 			{
-				System.out.println("Escolha uma das opcoes abaixo: ");
-				System.out.println("1 - Candidatos");
-				System.out.println("2 - Eleitores");
-				System.out.println("3 - Iniciar eleições");
-				System.out.println("4 - Relatorios");
-				System.out.println("0 - SAIR");
-				opcao = in.nextInt();
-				
-				switch (opcao)
-				{
-					case 1: CandidatoMenu(listas);
-							break;
-					case 2: EleitorMenu(listas);
-							break;
-					case 3: 
+				case 1: CandidatoMenu(listas);
+						break;
+				case 2: EleitorMenu(listas);
+						break;
+				case 3:
+					try{
 							i = listas.eleitores.iterator();
 							j = listas.prefeitos.iterator();
 							k = listas.vereadores.iterator();
@@ -56,7 +56,14 @@ public class UrnaEletronica {
 								}
 							}
 							break;
-					case 4: 
+					}
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+					
+				case 4:
+					try{
 							i = listas.eleitores.iterator();
 							j = listas.prefeitos.iterator();
 							k = listas.vereadores.iterator();
@@ -79,15 +86,18 @@ public class UrnaEletronica {
 								}
 							}						
 							break;
-					case 0: System.exit(0);
-					default: System.out.println("Opcao invalida!!!");
-				}
+					}
+					catch (InexistenteException e)
+					{
+						System.out.println("Erro: "+e.toString());
+					}
+
+				default:
+					if(opcao!=0)
+						System.out.println("Opcao invalida!!!");
 			}
-			while (true);
 		}
-		catch (InexistenteException e)
-		{
-			System.out.println("Erro: "+e.toString());
-		}
+		while (true);
+
 	}
 }

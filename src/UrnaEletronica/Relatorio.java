@@ -56,9 +56,11 @@ public class Relatorio {
 		System.out.println("Codigo: "+v.getCodigo());
 		System.out.println("Total de votos: "+v.getNumVotosTotal());
 		if(aux==1){
+			System.out.println("");
 			System.out.println("Total de votos zona 001: "+v.getNumVotosZona001());
 			System.out.println("Total de votos zona 002: "+v.getNumVotosZona002());
 			System.out.println("Total de votos zona 003: "+v.getNumVotosZona003());
+			System.out.println("");
 		}
 		System.out.println("-----------------------------");
 		

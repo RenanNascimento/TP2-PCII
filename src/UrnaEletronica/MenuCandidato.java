@@ -35,7 +35,7 @@ public class MenuCandidato
 	    	System.out.println("Digite a opcao desejada: ");
 	    	System.out.println("1 - Prefeito");
 	    	System.out.println("2 - Vereador");
-	    	System.out.println("0 - SAIR");
+	    	System.out.println("0 - VOLTAR");
 	    	opcao = in.nextInt();
 	    	if(opcao==0){
 	    		menu = false;
