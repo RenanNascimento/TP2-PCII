@@ -33,7 +33,7 @@ public class IniciarEleicoes
 		Prefeito p;
 		Vereador v;
 		Iterator t, h;
-		boolean votou, cadastroPresidente = false;
+		boolean votouPrefeito, votouVereador, cadastroPresidente = false;
 		int confirmaFechamento;
 			
 		try{
@@ -104,92 +104,97 @@ public class IniciarEleicoes
 				{
 					case 1: 
 						try{
-							if (presidentes[0].getSecaoEncerrada ()==false)
+							votouPrefeito=false;
+							votouVereador=false;
+							while (votouPrefeito==false || votouVereador==false)
 							{
-								t = listas.prefeitos.iterator();
-								h = listas.vereadores.iterator();
-								System.out.println("Digite o titulo do eleitor para votacao: ");
-								titulo = in.next();
-								if (validacaoTituloEleitor (titulo, listas.eleitores))
+								if (presidentes[0].getSecaoEncerrada ()==false)
 								{
-									eleitor = pesquisaEleitor (titulo, listas.eleitores);
-									if (eleitor.getZona().equals("001"))
+									t = listas.prefeitos.iterator();
+									h = listas.vereadores.iterator();
+									System.out.println("Digite o titulo do eleitor para votacao: ");
+									titulo = in.next();
+									if (validacaoTituloEleitor (titulo, listas.eleitores))
 									{
-										//Votacao prefeito
-										votou = false;
-										p = null;
-										while(votou==false){
-											System.out.println("Digite o codigo do prefeito: ");
-											System.out.println("Caso 99 - BRANCO");
-											codigo = in.nextInt();
-											if(codigo == 99){
-												relatorio.setVotoBrancoPrefeito();
-												votou=true;
-												break;
-											}else{
-												validacaoCodigoPrefeito (codigo, listas.prefeitos);
+										eleitor = pesquisaEleitor (titulo, listas.eleitores);
+										if (eleitor.getZona().equals("001"))
+										{
+											//Votacao prefeito
+											p = null;
+											while(votouPrefeito==false){
+												t = listas.prefeitos.iterator();
+												System.out.println("Digite o codigo do prefeito: ");
+												System.out.println("Caso 99 - BRANCO");
+												codigo = in.nextInt();
+												if(codigo == 99){
+													relatorio.setVotoBrancoPrefeito();
+													votouPrefeito=true;
+													break;
+												}else{
+													validacaoCodigoPrefeito (codigo, listas.prefeitos);
+												
+													while(t.hasNext()){
+														p = (Prefeito) t.next();
+														if(codigo == p.getCodigo()){
+															listarPrefeitoParcial(p);
+															break;
+														}
+													}
+													System.out.println("Voce realmente deseja votar nesse prefeito (1-Sim/0-Nao): ");
+													opcaoVotar = in.nextInt();
+													if(opcaoVotar == 1){
+														p.setNumVotosTotal();
+														p.setNumVotosZona001();
+														votouPrefeito = true;
+														System.out.println("Voto confirmado!!!");
+													}else{
+														votouPrefeito = false;
+													}
+												}
+											}
 											
-												while(t.hasNext()){
-													p = (Prefeito) t.next();
-													if(codigo == p.getCodigo()){
-														listarPrefeitoParcial(p);
-														break;
+											//Votacao vereador
+											System.out.println("");
+											v = null;
+											while(votouVereador==false){
+												h = listas.vereadores.iterator();
+												System.out.println("Digite o codigo vererador: ");
+												System.out.println("Caso 9999 - BRANCO");
+												codigo = in.nextInt();
+												if (codigo == 9999){
+													relatorio.setVotoBrancoVereador();
+													votouVereador=true;
+													break;
+												}else{
+													validacaoCodigoVereador (codigo, listas.vereadores);
+	
+													while(h.hasNext()){
+														v = (Vereador) h.next();
+														if (codigo == v.getCodigo()) {
+															listarVereador (v);
+															break;
+														}
+													}
+													System.out.println("Voce realmente deseja votar nesse vereador (1-Sim/0-Nao): ");
+													opcaoVotar = in.nextInt();
+													if(opcaoVotar == 1){
+														v.setNumVotosTotal();
+														v.setNumVotosZona001();
+														votouVereador = true;
+														System.out.println("Voto confirmado!!!");
+													}else{
+														votouVereador = false;
 													}
 												}
-												System.out.println("Voce realmente deseja votar nesse prefeito (1-Sim/0-Nao): ");
-												opcaoVotar = in.nextInt();
-												if(opcaoVotar == 1){
-													p.setNumVotosTotal();
-													p.setNumVotosZona001();
-													votou = true;
-													System.out.println("Voto confirmado!!!");
-												}else{
-													votou = false;
-												}
 											}
+										}else{
+											throw new ZonaInvalidaException ("Zona invalida!!!");
 										}
-										
-										//Votacao vereador
-										System.out.println("");
-										votou = false;
-										v = null;
-										while(votou==false){										
-											System.out.println("Digite o codigo vererador: ");
-											System.out.println("Caso 9999 - BRANCO");
-											codigo = in.nextInt();
-											if (codigo == 9999){
-												relatorio.setVotoBrancoVereador();
-												votou=true;
-												break;
-											}else{
-												validacaoCodigoVereador (codigo, listas.vereadores);
-
-												while(h.hasNext()){
-													v = (Vereador) h.next();
-													if (codigo == v.getCodigo()) {
-														listarVereador (v);
-														break;
-													}
-												}
-												System.out.println("Voce realmente deseja votar nesse vereador (1-Sim/0-Nao): ");
-												opcaoVotar = in.nextInt();
-												if(opcaoVotar == 1){
-													v.setNumVotosTotal();
-													v.setNumVotosZona001();
-													votou = true;
-													System.out.println("Voto confirmado!!!");
-												}else{
-													votou = false;
-												}
-											}
-										}
-									}else{
-										throw new ZonaInvalidaException ("Zona invalida!!!");
 									}
 								}
+								else
+									System.out.println("A votacao na zona 001 esta encerrada!!!");
 							}
-							else
-								System.out.println("A votacao na zona 001 esta encerrada!!!");
 						}
 						catch (TituloInvalidoException e)
 						{
@@ -250,15 +255,15 @@ public class IniciarEleicoes
 									if (eleitor.getZona().equals("002"))
 									{
 										//Votacao prefeito
-										votou = false;
+										votouPrefeito = false;
 										p = null;
-										while(votou==false){
+										while(votouPrefeito==false){
 											System.out.println("Digite o codigo do prefeito: ");
 											System.out.println("Caso 99 - BRANCO");
 											codigo = in.nextInt();
 											if(codigo == 99){
 												relatorio.setVotoBrancoPrefeito();
-												votou=true;
+												votouPrefeito=true;
 												break;
 											}else{
 												verificaCodigoPrefeito (codigo);
@@ -275,25 +280,25 @@ public class IniciarEleicoes
 											if(opcaoVotar == 1){
 												p.setNumVotosTotal();
 												p.setNumVotosZona002();
-												votou = true;
+												votouPrefeito = true;
 												System.out.println("Voto confirmado!!!");
 											}else{
-												votou = false;
+												votouPrefeito = false;
 											}
 										}
 										
 										//Votacao vereador
 										System.out.println("");
-										votou = false;
+										votouVereador = false;
 										v = null;
-										while(votou==false){										
+										while(votouVereador==false){										
 											System.out.println("Digite o codigo vererador: ");
 											System.out.println("Caso 9999 - BRANCO");
 											codigo = in.nextInt();
 											verificaCodigoVereador (codigo);
 											if (codigo == 9999){
 												relatorio.setVotoBrancoVereador();
-												votou=true;
+												votouVereador=true;
 												break;
 											}
 											while(h.hasNext()){
@@ -308,10 +313,10 @@ public class IniciarEleicoes
 											if(opcaoVotar == 1){
 												v.setNumVotosTotal();
 												v.setNumVotosZona002();
-												votou = true;
+												votouVereador = true;
 												System.out.println("Voto confirmado!!!");
 											}else{
-												votou = false;
+												votouVereador = false;
 											}		
 										}
 									}
@@ -374,16 +379,16 @@ public class IniciarEleicoes
 									if (eleitor.getZona().equals("003"))
 									{
 										//Votacao prefeito
-										votou = false;
+										votouPrefeito = false;
 										p = null;
-										while(votou==false){
+										while(votouPrefeito==false){
 											System.out.println("Digite o codigo do prefeito: ");
 											System.out.println("Caso 99 - BRANCO");
 											codigo = in.nextInt();
 											verificaCodigoPrefeito (codigo);
 											if(codigo == 99){
 												relatorio.setVotoBrancoPrefeito();
-												votou=true;
+												votouPrefeito=true;
 												break;
 											}
 											while(t.hasNext()){
@@ -398,25 +403,25 @@ public class IniciarEleicoes
 											if(opcaoVotar == 1){
 												p.setNumVotosTotal();
 												p.setNumVotosZona003();
-												votou = true;
+												votouPrefeito = true;
 												System.out.println("Voto confirmado!!!");
 											}else{
-												votou = false;
+												votouPrefeito = false;
 											}
 										}
 										
 										//Votacao vereador
 										System.out.println("");
-										votou = false;
+										votouVereador = false;
 										v = null;
-										while(votou==false){										
+										while(votouVereador==false){										
 											System.out.println("Digite o codigo vererador: ");
 											System.out.println("Caso 9999 - BRANCO");
 											codigo = in.nextInt();
 											verificaCodigoVereador (codigo);
 											if (codigo == 9999){
 												relatorio.setVotoBrancoVereador();
-												votou=true;
+												votouVereador=true;
 												break;
 											}
 											while(h.hasNext()){
@@ -431,10 +436,10 @@ public class IniciarEleicoes
 											if(opcaoVotar == 1){
 												v.setNumVotosTotal();
 												v.setNumVotosZona003();
-												votou = true;
+												votouVereador = true;
 												System.out.println("Voto confirmado!!!");
 											}else{
-												votou = false;
+												votouVereador = false;
 											}		
 										}
 									}
