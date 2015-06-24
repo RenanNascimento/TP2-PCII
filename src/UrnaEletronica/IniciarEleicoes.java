@@ -79,7 +79,7 @@ public class IniciarEleicoes
 				switch (opcao)
 				{
 					case 1: 
-						if (presidentes[0].getSecaoEncerrada ()==true)
+						if (presidentes[0].getSecaoEncerrada ()==false)
 						{
 							t = listas.prefeitos.iterator();
 							h = listas.vereadores.iterator();
@@ -173,7 +173,7 @@ public class IniciarEleicoes
 						}
 					
 					case 3:
-						if (presidentes[1].getSecaoEncerrada ()==true)
+						if (presidentes[1].getSecaoEncerrada ()==false)
 						{
 							t = listas.prefeitos.iterator();
 							h = listas.vereadores.iterator();
@@ -266,7 +266,7 @@ public class IniciarEleicoes
 							throw new TituloInvalidoException ("Titulo invalido!!!");
 						}
 					case 5:
-						if (presidentes[2].getSecaoEncerrada ()==true)
+						if (presidentes[2].getSecaoEncerrada ()==false)
 						{
 							t = listas.prefeitos.iterator();
 							h = listas.vereadores.iterator();
