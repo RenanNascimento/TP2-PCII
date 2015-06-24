@@ -98,8 +98,20 @@ public class Eleitor
 		
 		for (i=0; i<eleitores.size(); i++)
 			if (titulo.equals(eleitores.get(i).getTitulo()))
-				throw new TituloInvalidoException ("Ja existe uma passoa com esse titulo cadastrado!!!");
+				throw new TituloInvalidoException ("Ja existe uma pessoa com esse titulo cadastrado!!!");
 		return true;
+	}
+	
+	public static boolean validacaoTituloEleitor (String titulo, ArrayList <Eleitor> eleitores) throws TituloInvalidoException
+	{
+		int i;
+		
+		for (i=0; i<eleitores.size(); i++){
+			if (titulo.equals(eleitores.get(i).getTitulo()))
+				return true;
+		}
+		throw new TituloInvalidoException ("Titulo inexistente!!!");
+
 	}
 	
 	public static Eleitor pesquisaEleitor (String titulo, ArrayList <Eleitor> eleitores) throws EleitorNaoExistenteException
