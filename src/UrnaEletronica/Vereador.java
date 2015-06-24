@@ -29,7 +29,7 @@ public class Vereador extends Candidato{
 		System.out.println("------------------------------------");
     }
     
-    public static boolean validacaoCodigoVereador (int codigo, ArrayList <Vereador> vereadores) throws CodigoInvalidoException
+    public static boolean validacaoCodigoVereador (int codigo, ArrayList <Vereador> vereadores)
 	{
 		int i;
 		
@@ -37,7 +37,6 @@ public class Vereador extends Candidato{
 			if (codigo == vereadores.get(i).getCodigo())
 				return true;
 		}
-		throw new CodigoInvalidoException ("Vereador inexistente!!!");
-
+			return false;
 	}
 }

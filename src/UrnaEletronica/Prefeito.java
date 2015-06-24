@@ -52,7 +52,7 @@ public class Prefeito extends Candidato
 	
     }
     
-    public static boolean validacaoCodigoPrefeito (int codigo, ArrayList <Prefeito> prefeitos) throws CodigoInvalidoException
+    public static boolean validacaoCodigoPrefeito (int codigo, ArrayList <Prefeito> prefeitos)
 	{
 		int i;
 		
@@ -60,7 +60,6 @@ public class Prefeito extends Candidato
 			if (codigo == prefeitos.get(i).getCodigo())
 				return true;
 		}
-		throw new CodigoInvalidoException ("Prefeito inexistente!!!");
-
+			return false;
 	}
 }
