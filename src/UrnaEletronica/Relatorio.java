@@ -87,13 +87,15 @@ public class Relatorio {
 				System.out.println("Codigo: "+p.get(i).getCodigo());
 				System.out.println("Nome Vice-Prefeito: "+p.get(i).vicePrefeito.getNome()); 
 				System.out.println("Total de votos: "+p.get(i).getNumVotosTotal());
+				System.out.println("");
 				break;
 			}
-			if(p.get(i).getNumVotosTotal() == maisVotos && x.equals("-")){
+			if(p.get(i).getNumVotosTotal() == menosVotos && x.equals("-")){
 				System.out.println("Nome: "+p.get(i).getNome());
 				System.out.println("Codigo: "+p.get(i).getCodigo());
 				System.out.println("Nome Vice-Prefeito: "+p.get(i).vicePrefeito.getNome()); 
 				System.out.println("Total de votos: "+p.get(i).getNumVotosTotal());
+				System.out.println("");
 				break;				
 			}
 		}
@@ -110,7 +112,7 @@ public class Relatorio {
 			if(v.get(i).getNumVotosTotal() > maisVotos && x.equals("+")){
 				maisVotos = v.get(i).getNumVotosTotal();
 			}
-			if(v.get(i).getNumVotosTotal() < menosVotos && x.equals("-")){
+			if((v.get(i).getNumVotosTotal() < menosVotos) && x.equals("-")){
 				menosVotos = v.get(i).getNumVotosTotal();
 			}
 		}
@@ -120,12 +122,14 @@ public class Relatorio {
 				System.out.println("Nome: "+v.get(i).getNome());
 				System.out.println("Codigo: "+v.get(i).getCodigo()); 
 				System.out.println("Total de votos: "+v.get(i).getNumVotosTotal());
+				System.out.println("");
 				break;
 			}
-			if(v.get(i).getNumVotosTotal() == maisVotos && x.equals("-")){
+			if(v.get(i).getNumVotosTotal() == menosVotos && x.equals("-")){
 				System.out.println("Nome: "+v.get(i).getNome());
 				System.out.println("Codigo: "+v.get(i).getCodigo()); 
 				System.out.println("Total de votos: "+v.get(i).getNumVotosTotal());
+				System.out.println("");
 				break;				
 			}
 		}

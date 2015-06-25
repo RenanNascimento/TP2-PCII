@@ -18,6 +18,7 @@ public class UrnaEletronica {
 		MinhasListas listas = new MinhasListas ();
 		Relatorio relatorio = new Relatorio ();
 		boolean votou=false;
+		boolean menu=true;
 		
 		do
 		{
@@ -28,6 +29,9 @@ public class UrnaEletronica {
 			System.out.println("4 - Relatorios");
 			System.out.println("0 - SAIR");
 			opcao = in.nextInt();
+			
+			if (opcao==0)
+				menu=false;
 			
 			switch (opcao)
 			{
@@ -93,13 +97,12 @@ public class UrnaEletronica {
 						System.out.println("Erro: "+e.toString());
 					}
 					break;
-
 				default:
 					if(opcao!=0)
 						System.out.println("Opcao invalida!!!");
 			}
 		}
-		while (true);
+		while (menu);
 
 	}
 }

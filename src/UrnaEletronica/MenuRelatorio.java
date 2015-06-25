@@ -72,8 +72,10 @@ public class MenuRelatorio {
 	    			break;	    			
 	    			
 	    		case 5:
+	    			System.out.println("");
 	    			System.out.println("Qtde votos branco prefeito: "+relatorio.getVotoBrancoPrefeito());
 	    			System.out.println("Qtde votos branco vereador: "+relatorio.getVotoBrancoVereador());
+	    			System.out.println("");
 	    			break;
 	    			
 	    		case 6:
